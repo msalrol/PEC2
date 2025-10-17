@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "es2015", // La versión de Javascript a la que queremos compilar el código
+    "module": "commonjs", // Sistema de módulos en el que usaremos el Javascript generado
+    "outDir": "./dist", // Dónde vamos a compilar el JS generado a través de los archivos TS
+    "rootDir": "./src", // Dónde vamos a buscar los archivos TS para compilarlos a JS
+    "strict": true, // Ejecuta todas las comprobaciones estrictas de TS para detectar posibles errores
+    "incremental": true, // Compila solo los archivos modificados desde la última compilación
+    "tsBuildInfoFile": "./buildcache", // Ruta donde se el caché de archivos de TS modificados para no repetir
+   } 
+}

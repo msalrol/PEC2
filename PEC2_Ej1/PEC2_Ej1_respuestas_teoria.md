@@ -20,3 +20,8 @@ h- Es un tipo null. El valor es null y TS lo infiere como tal.
 i- Salta error porque estamos tratando de asignar un valor nuevo a una constante.
 j- En este caso, hemos asignado a j un array de tipo numérico. Por ello, no podemos hacer un push a un valor de tipo string dentro de ese array.
 k- No se puede asignar ningún valor a un tipo 'never'. Su función es, precisamente, que no se le asigne otro valor no deseado.
+l/m- Nos lanza error porque estamos realizando una operación sin saber el tipo de l. Unknown nos indica que el tipo de la variable es desconocido; por ello, tratar de operar con ella como si fuera un tipo numérico sin previamente haberlo comprobado nos lanza error.
+
+**-¿Cuál es la diferencia entre una clase y una interface en TypeScript?**
+
+La principal diferencia es que una interface nos define qué es lo que tiene que contener ese objeto o variable, mientras que la clase implementa una plantilla con variables y métodos y generando, de esta manera, instancias. Una interface define la estructura de ese objeto especificando qué tiene (o qué es opcional) que tenga. Son una especie de validación de tipos frente a las clases, que existen también en tiempo de ejecución

@@ -2,5 +2,9 @@
 
 -Manuel Salvador Roldán
 
-**-PEC2_Ej2_1:** 
+**-PEC2_Ej1_1:** Para este primer ejercicio, la clave ha sido comprender y leer documentación de Typescript para entender la importancia de este lenguaje y sus posibilidades y extensiones frente a Javascript. 
 
+**-PEC2_Ej2_1:** En este segundo ejercicio, se han ido completando las diferentes modificaciones del array original para que el resultado sea el oportuno. Para comprobar que se ha realizado correctamente, hemos compilado el TS realizando un tsc ejercicio1.ts e indicando en el tsconfig.json la entrada y salida de archivos y realizado desde la consola de Visual Studio Code un node ejercicio1.js. Hacemos lo mismo con el ejercicio2.ts, solo que en este caso, al realizar más pruebas, se ha activado el modo --watch para que la compilación a JS sea automática (tsc ejercicio2.ts --watch). Para el último ejercicio, repetimos el --watch, y en este caso lo que vamos a tener que definir es tanto el sonido en cada animal como la herencia de la clase padre Animal. Deberemos, pues, definir el constructor en la clase padre y pasarle dos argumentos optativos, ya ambas usan un argumento diferente. Lo pasamos con constructor y super a las hijas y luego recorremos ambos elementos del array atendiendo a la instancia a la que pertenezcan con instanceof.
+
+**-PEC2_Ej3_1:** Para el último ejercicio, lo primero que he realizado es analizar el código y entenderlo, siguiendo la arquitectura MVC. Para comenzar el proyecto, es necesario reorganizar la estructura de carpetas y utilizar Typescrit desde el terminal, donde ejecutaremos esta extensión. A continuación, dividiremos el js y el ts: la carpeta de src para el TS, y dist para compilar la aplicación, y configuramos el archivo tsconfig para que la entrada y salida se corresponda con dichas carpetas. 
+Para cambiar el archivo de model, hemos modificado el constructor y especificado los tipos de las variables; sin embargo, el codigo de generar la id chocaba con la configuración de TS. La forma más sencilla de solucionarlo ha sido instalar el paquete de uuid (https://www.npmjs.com/package/uuid#support), y generar así la id sin problemas.
