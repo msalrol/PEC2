@@ -4,10 +4,22 @@
  * Visual representation of the model.
  */
 class TodoView {
+
+  app: HTMLDivElement;
+  form: HTMLFormElement;
+  input: HTMLInputElement;
+  submitButton: HTMLButtonElement;
+  title: HTMLHeadingElement;
+  todoList: HTMLUListElement;
+  span: HTMLSpanElement;
+  _temporaryTodoText: string;
+
+
   constructor() {
     this.app = this.getElement("#root");
-    this.form = this.createElement("form");
+    this.form = this.createElement("form",);
     this.input = this.createElement("input");
+    this.span = this.createElement("span");
     this.input.type = "text";
     this.input.placeholder = "Add todo";
     this.input.name = "todo";
@@ -31,21 +43,22 @@ class TodoView {
     this.input.value = "";
   }
 
-  createElement(tag, className) {
+  createElement<K extends keyof HTMLElementTagNameMap>(
+    tag: K,
+    className?: string
+  ): HTMLElementTagNameMap[K] {
     const element = document.createElement(tag);
-
     if (className) element.classList.add(className);
-
     return element;
   }
 
-  getElement(selector) {
+  getElement(selector: string) {
     const element = document.querySelector(selector);
 
     return element;
   }
 
-  displayTodos(todos) {
+  displayTodos(todos: any[]) {
     // Delete all nodes
     while (this.todoList.firstChild) {
       this.todoList.removeChild(this.todoList.firstChild);
@@ -58,7 +71,7 @@ class TodoView {
       this.todoList.append(p);
     } else {
       // Create nodes
-      todos.forEach(todo => {
+      todos.forEach((todo: { id: any; complete: any; text: any; }) => {
         const li = this.createElement("li");
         li.id = todo.id;
 
@@ -66,21 +79,20 @@ class TodoView {
         checkbox.type = "checkbox";
         checkbox.checked = todo.complete;
 
-        const span = this.createElement("span");
-        span.contentEditable = true;
-        span.classList.add("editable");
+        this.span.contentEditable = "true";
+        this.span.classList.add("editable");
 
         if (todo.complete) {
           const strike = this.createElement("s");
           strike.textContent = todo.text;
-          span.append(strike);
+          this.span.append(strike);
         } else {
-          span.textContent = todo.text;
+          this.span.textContent = todo.text;
         }
 
         const deleteButton = this.createElement("button", "delete");
         deleteButton.textContent = "Delete";
-        li.append(checkbox, span, deleteButton);
+        li.append(checkbox, this.span, deleteButton);
 
         // Append nodes
         this.todoList.append(li);
@@ -99,7 +111,7 @@ class TodoView {
     });
   }
 
-  bindAddTodo(handler) {
+  bindAddTodo(handler: (arg0: string) => void) {
     this.form.addEventListener("submit", event => {
       event.preventDefault();
 
@@ -110,7 +122,7 @@ class TodoView {
     });
   }
 
-  bindDeleteTodo(handler) {
+  bindDeleteTodo(handler: (arg0: any) => void) {
     this.todoList.addEventListener("click", event => {
       if (event.target.className === "delete") {
         const id = event.target.parentElement.id;
@@ -120,7 +132,7 @@ class TodoView {
     });
   }
 
-  bindEditTodo(handler) {
+  bindEditTodo(handler: (arg0: any, arg1: string) => void) {
     this.todoList.addEventListener("focusout", event => {
       if (this._temporaryTodoText) {
         const id = event.target.parentElement.id;
@@ -131,7 +143,7 @@ class TodoView {
     });
   }
 
-  bindToggleTodo(handler) {
+  bindToggleTodo(handler: (arg0: any) => void) {
     this.todoList.addEventListener("change", event => {
       if (event.target.type === "checkbox") {
         const id = event.target.parentElement.id;

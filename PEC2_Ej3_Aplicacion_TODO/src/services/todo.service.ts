@@ -8,55 +8,59 @@
  *
  * Manages the data of the application.
  */
- import type { ITodo } from "../models/todo.model";
- import { Todo } from "../models/todo.model";
- 
+import type { ITodo } from "../models/todo.model";
+import { Todo } from "../models/todo.model";
+
 
 class TodoService {
+
   todos: ITodo[];
+  onTodoListChanged!: (todos: ITodo[]) => void;
 
   constructor() {
     this.todos = (JSON.parse(localStorage.getItem("todos") || "[]") as ITodo[]).map(
       todo => new Todo(todo)
     );
   }
-}
 
-  bindTodoListChanged(callback) {
+
+
+  bindTodoListChanged(callback: (todos: ITodo[]) => void) {
     this.onTodoListChanged = callback;
   }
 
-  _commit(todos) {
+
+  _commit(todos: ITodo[]) {
     this.onTodoListChanged(todos);
     localStorage.setItem("todos", JSON.stringify(todos));
   }
 
-  addTodo(text) {
+  addTodo(text: string) {
     this.todos.push(new Todo({ text }));
 
     this._commit(this.todos);
   }
 
-  editTodo(id, updatedText) {
+  editTodo(id: string, updatedText: string) {
     this.todos = this.todos.map(todo =>
       todo.id === id
         ? new Todo({
-            ...todo,
-            text: updatedText
-          })
+          ...todo,
+          text: updatedText
+        })
         : todo
     );
 
     this._commit(this.todos);
   }
 
-  deleteTodo(_id) {
+  deleteTodo(_id: string) {
     this.todos = this.todos.filter(({ id }) => id !== _id);
 
     this._commit(this.todos);
   }
 
-  toggleTodo(_id) {
+  toggleTodo(_id: string) {
     this.todos = this.todos.map(todo =>
       todo.id === _id ? new Todo({ ...todo, complete: !todo.complete }) : todo
     );
@@ -64,3 +68,4 @@ class TodoService {
     this._commit(this.todos);
   }
 }
+

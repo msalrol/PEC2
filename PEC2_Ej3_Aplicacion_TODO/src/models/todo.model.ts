@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 export interface ITodo {
   text: string;
   complete: boolean;
+  id: string;
 }
 
 export class Todo {
