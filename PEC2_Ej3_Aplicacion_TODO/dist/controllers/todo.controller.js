@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @class Controller
  *
@@ -8,21 +6,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param model
  * @param view
  */
-class TodoController {
+export class TodoController {
     constructor(service, view) {
-        this.onTodoListChanged = todos => {
+        this.onTodoListChanged = (todos) => {
+            console.log(todos);
             this.view.displayTodos(todos);
         };
-        this.handleAddTodo = todoText => {
+        this.handleAddTodo = (todoText) => {
             this.service.addTodo(todoText);
         };
         this.handleEditTodo = (id, todoText) => {
             this.service.editTodo(id, todoText);
         };
-        this.handleDeleteTodo = id => {
+        this.handleDeleteTodo = (id) => {
             this.service.deleteTodo(id);
         };
-        this.handleToggleTodo = id => {
+        this.handleToggleTodo = (id) => {
             this.service.toggleTodo(id);
         };
         this.service = service;
@@ -37,4 +36,3 @@ class TodoController {
         this.onTodoListChanged(this.service.todos);
     }
 }
-//# sourceMappingURL=todo.controller.js.map

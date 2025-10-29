@@ -9,10 +9,10 @@
  * Manages the data of the application.
  */
 import type { ITodo } from "../models/todo.model";
-import { Todo } from "../models/todo.model";
+import { Todo } from "../models/todo.model.js";
 
 
-class TodoService {
+export class TodoService {
 
   todos: ITodo[];
   onTodoListChanged!: (todos: ITodo[]) => void;
@@ -35,8 +35,13 @@ class TodoService {
     localStorage.setItem("todos", JSON.stringify(todos));
   }
 
-  addTodo(text: string) {
-    this.todos.push(new Todo({ text }));
+  addTodo(texto: string) {
+    this.todos.push(new Todo({ 
+      text: texto,
+      complete: false
+
+    }));
+    console.log(this.todos);
 
     this._commit(this.todos);
   }
